@@ -1,17 +1,17 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 
 
-export const middleware = ()=>{
-  console.log('hello')
-}
+// export const middleware = ()=>{
+//   console.log('hello')
+// }
 
 const isPublicRoute = createRouteMatcher(['/sign-in(.*)', '/sign-up(.*)', '/']);
 
-// export default clerkMiddleware((auth, request) => {
-//   if(!isPublicRoute(request)) {
-//     auth().protect();
-//   }
-// });
+export default clerkMiddleware((auth, request) => {
+  if(!isPublicRoute(request)) {
+    auth().protect();
+  }
+});
 
 export const config = {
   matcher: ["/((?!.*\\..*|_next).*)", "/", "/(api|trpc)(.*)"],
